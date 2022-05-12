@@ -5,6 +5,10 @@ name: build-artifacts
 # Controls when the workflow will run
 on:
  workflow_dispatch:
+ workflow_call:
+   parent_run_id:
+     description: "Run id of calling build action"
+     value: ${{ github.run_id }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,7 +22,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - name: print test
-        run: echo "here we are"
+        run: echo ${{ github.run_id }}
       - name: upload all python scripts as artifacts
         uses: actions/upload-artifact@v3
         with: 
