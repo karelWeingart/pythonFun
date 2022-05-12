@@ -30,10 +30,9 @@ jobs:
         with: 
           name: python script artifacts
           path: scripts
-      - name: run deployment action
-        uses: ./.github/workflows/main.yml
-        with:
-            parent_run_id: ${{ inputs.parent_run_id }}
+      - name: create docker image for given script
+        run: docker build -t new-python-image ./docker
+      
         
 
      
