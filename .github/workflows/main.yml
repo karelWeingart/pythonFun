@@ -2,16 +2,13 @@
 
 name: run-given-script
 
+
 # Controls when the workflow will run
 on:
-    # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-  workflow_call:
-    inputs:
-      parent_run_id: 
-        description: "run id of parent job - used to get the artifacts"
-        required: true
-        type: string
+ workflow_run:
+    workflows: [build-artifacts]
+    types:
+      - completed
   
 env:
   SCRIPT_TO_BE_RUN: scripts/test.py
@@ -30,11 +27,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-          echo ${{ inputs.parent_run_id }}
+          echo "test"
+          #docker build -t new-python-image ./docker
