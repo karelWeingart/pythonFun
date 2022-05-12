@@ -4,14 +4,14 @@ name: run-given-script
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
+    # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      parent_run_id: 
+        description: "run id of parent job - used to get the artifacts"
+        required: true
+        type: string
   
 env:
   SCRIPT_TO_BE_RUN: scripts/test.py
@@ -37,3 +37,4 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          echo ${{ inputs.parent_run_id }}
