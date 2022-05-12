@@ -30,6 +30,10 @@ jobs:
         with: 
           name: python script artifacts
           path: scripts
+      - name: run deployment action
+        uses: ./.github/workflows/run-given-script
+        with:
+            parent_run_id: ${{ inputs.parent_run_id }}
         
 
      
