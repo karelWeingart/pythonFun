@@ -31,7 +31,9 @@ jobs:
           name: python script artifacts
           path: scripts
       - name: create docker image for given script
-        run: docker build -t new-python-image ./docker
+        run: |
+          curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/karelWeingart/pythonFun/actions/runs/${{ github.run_id }}/artifacts
+          #docker build -t new-python-image ./docker
       
         
 
